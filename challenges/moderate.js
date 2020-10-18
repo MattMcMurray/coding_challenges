@@ -3,7 +3,24 @@
 
 class TicTacToe {
   constructor(board) {
+    this._validateGameBoard(board);
     this.board = board;
+  }
+
+  _validateGameBoard(board) {
+    if (board.length !== board[0].length) {
+      throw new Error(
+        `Invalid dimensions (${board[0].length}, ${board.length}). Game board must be square.`
+      );
+    }
+
+    for (let y = 0; y < board.length; y++) {
+      if (board[y].length !== board.length) {
+        throw new Error(
+          `Row at index ${y} has invalid number of items (${board[y].length}). Row length must match game board height (${board.length}).`
+        )
+      }
+    }
   }
 
   _checkColumns() {
@@ -66,10 +83,7 @@ class TicTacToe {
         characterSeen = this.board[y][x];
       } else if (this.board[y][x] !== characterSeen) {
         break;
-      } else if (
-        i === 0 &&
-        this.board[y][x] === characterSeen
-      ) {
+      } else if (i === 0 && this.board[y][x] === characterSeen) {
         return characterSeen;
       }
     }
