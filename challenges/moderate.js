@@ -18,7 +18,7 @@ class TicTacToe {
       if (board[y].length !== board.length) {
         throw new Error(
           `Row at index ${y} has invalid number of items (${board[y].length}). Row length must match game board height (${board.length}).`
-        )
+        );
       }
     }
   }
@@ -111,6 +111,31 @@ class TicTacToe {
   }
 }
 
+/**
+ * Design an algorithm to find all pairs of integers within
+ * an array which sum to a given value.
+ *
+ * @param {int} target the target integer
+ * @param {Array} arr the array with integer values
+ */
+function findSumPairs(target, arr) {
+  let pairs = [];
+  let addedValues = [];
+
+  for (let item of arr) {
+    const comparisonVal = target - item;
+
+    if (arr.includes(comparisonVal) && !addedValues.includes(item)) {
+      pairs.push([item, comparisonVal]);
+
+      addedValues.push(comparisonVal);
+    }
+  }
+
+  return pairs;
+}
+
 module.exports = {
   TicTacToe,
+  findSumPairs,
 };

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const { assert, expect } = require("chai");
 
-const { TicTacToe } = require("../challenges/moderate");
+const { TicTacToe, findSumPairs } = require("../challenges/moderate");
 
 describe("Moderate", () => {
   describe("Tic Tac Toe", () => {
@@ -91,6 +91,42 @@ describe("Moderate", () => {
         Error,
         "Row at index 1 has invalid number of items (2). Row length must match game board height (3)."
       );
+    });
+  });
+
+  describe("findSumPairs", () => {
+    it("should return the correct values for a simple example", () => {
+      let nums = [-1, 5, 8, 6, 14, 2, 9];
+      let target = 7;
+
+      expect(findSumPairs(target, nums)).to.eql([
+        [-1, 8],
+        [5, 2],
+      ]);
+    });
+
+    it("should return an empty array when an empty array is given", () => {
+      let nums = [];
+      let target = 99;
+
+      expect(findSumPairs(target, nums)).to.eql([]);
+    });
+
+    it("should return an empty array when no matches are found", () => {
+      let nums = [-1, 5, 8, 6, 14, 2, 9];
+      let target = 99;
+
+      expect(findSumPairs(target, nums)).to.eql([]);
+    });
+
+    it("should only return 1 instance when many duplicates are present", () => {
+      let nums = [5, 5, 5, 5, 5, 5, 5, 5, 5, 2, 8];
+      let target = 10;
+
+      expect(findSumPairs(target, nums)).to.eql([
+        [5, 5],
+        [2, 8],
+      ]);
     });
   });
 });
